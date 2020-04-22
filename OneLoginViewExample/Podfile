@@ -1,0 +1,11 @@
+platform:ios,’8.0’
+#use_frameworks!
+#inhibit_all_warnings! #消除第三方仓库的警告
+source 'git@github.com:CocoaPods/Specs.git'
+
+target :'OneLoginViewExample' do
+    pod 'GTOneLoginSDK', '~> 2.1.3.0'
+    pod 'MBProgressHUD', '~> 1.1.0'
+    pod 'Alamofire', '~> 4.9.1'
+    pod 'SnapKit'
+end

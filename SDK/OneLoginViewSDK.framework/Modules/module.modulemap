@@ -1,0 +1,6 @@
+framework module OneLoginViewSDK {
+  umbrella header "OneLoginViewSDK.h"
+
+  export *
+  module * { export * }
+}

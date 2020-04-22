@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z59-oY-Uwb">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="dSd-pS-4pL">
+            <objects>
+                <viewController storyboardIdentifier="SwiftLoginViewViewController" id="iyN-Xe-FoS" customClass="MainViewController" customModule="OneLoginViewExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MD9-e1-1Q0"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zuh-h1-Ukg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WOs-eF-aLX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGd-gn-upl">
+                                <rect key="frame" x="107" y="378" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.54901960780000003" green="0.3411764706" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="84R-Up-LyI"/>
+                                    <constraint firstAttribute="height" constant="40" id="jkt-mX-aDR"/>
+                                </constraints>
+                                <state key="normal" title="OneLoginViewPopup">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="popupOneloginViewAction:" destination="iyN-Xe-FoS" eventType="touchUpInside" id="z7L-QA-bWy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nvw-sb-XdG">
+                                <rect key="frame" x="107" y="453" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.54901960780000003" green="0.3411764706" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="OID-MM-xhz"/>
+                                    <constraint firstAttribute="width" constant="200" id="t7m-5y-RCj"/>
+                                </constraints>
+                                <state key="normal" title="OnePassViewHintBar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onepassHintBarViewAction:" destination="iyN-Xe-FoS" eventType="touchUpInside" id="LUl-8U-AOL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9X-jQ-Wt7">
+                                <rect key="frame" x="107" y="519" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.54901960780000003" green="0.3411764706" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UyR-4l-OcF"/>
+                                    <constraint firstAttribute="width" constant="200" id="ojG-7x-9rZ"/>
+                                </constraints>
+                                <state key="normal" title="OnePassViewNoHintBar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onepassNoHintBarViewAction:" destination="iyN-Xe-FoS" eventType="touchUpInside" id="doD-Nh-4eH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a73-UN-zVM">
+                                <rect key="frame" x="107" y="304" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.54901960780000003" green="0.3411764706" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="QgM-ie-5B7"/>
+                                    <constraint firstAttribute="height" constant="40" id="l4Y-X2-a2A"/>
+                                </constraints>
+                                <state key="normal" title="OneLoginView">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="oneloginViewAction:" destination="iyN-Xe-FoS" eventType="touchUpInside" id="Gc4-f5-Zx8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHG-dR-XRP">
+                                <rect key="frame" x="107" y="585" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.54901960780000003" green="0.3411764706" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3bP-Q4-NW5"/>
+                                    <constraint firstAttribute="width" constant="200" id="xwC-bq-U48"/>
+                                </constraints>
+                                <state key="normal" title="OnePassViewXib">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onepassViewInXibAction:" destination="iyN-Xe-FoS" eventType="touchUpInside" id="Oci-bQ-4Zv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="U9X-jQ-Wt7" firstAttribute="width" secondItem="Nvw-sb-XdG" secondAttribute="width" id="1ZO-kA-s11"/>
+                            <constraint firstItem="U9X-jQ-Wt7" firstAttribute="top" secondItem="Nvw-sb-XdG" secondAttribute="bottom" constant="26" id="608-3C-54z"/>
+                            <constraint firstItem="EGd-gn-upl" firstAttribute="centerY" secondItem="WOs-eF-aLX" secondAttribute="centerY" constant="-50" id="8tM-eT-Dtb"/>
+                            <constraint firstItem="a73-UN-zVM" firstAttribute="leading" secondItem="EGd-gn-upl" secondAttribute="leading" id="BaD-H9-oNr"/>
+                            <constraint firstItem="gHG-dR-XRP" firstAttribute="top" secondItem="U9X-jQ-Wt7" secondAttribute="bottom" constant="26" id="UE1-iQ-g1m"/>
+                            <constraint firstItem="gHG-dR-XRP" firstAttribute="centerX" secondItem="U9X-jQ-Wt7" secondAttribute="centerX" id="afL-2i-AJq"/>
+                            <constraint firstItem="U9X-jQ-Wt7" firstAttribute="height" secondItem="Nvw-sb-XdG" secondAttribute="height" id="cJ5-OE-YmB"/>
+                            <constraint firstItem="Nvw-sb-XdG" firstAttribute="top" secondItem="EGd-gn-upl" secondAttribute="bottom" constant="35" id="dPD-yZ-xfF"/>
+                            <constraint firstItem="Nvw-sb-XdG" firstAttribute="centerX" secondItem="EGd-gn-upl" secondAttribute="centerX" id="iUR-57-a9G"/>
+                            <constraint firstItem="U9X-jQ-Wt7" firstAttribute="centerX" secondItem="Nvw-sb-XdG" secondAttribute="centerX" id="s4m-mG-f2K"/>
+                            <constraint firstItem="EGd-gn-upl" firstAttribute="top" secondItem="a73-UN-zVM" secondAttribute="bottom" constant="34" id="sKc-jM-o6h"/>
+                            <constraint firstItem="EGd-gn-upl" firstAttribute="centerX" secondItem="WOs-eF-aLX" secondAttribute="centerX" id="van-YG-3a1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ds7-G9-qgb"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hpr-Z3-Pcb"/>
+                    <connections>
+                        <outlet property="oneloginViewButton" destination="a73-UN-zVM" id="eq8-oO-1rj"/>
+                        <outlet property="onepassViewHintBarButton" destination="Nvw-sb-XdG" id="Cr0-pf-vU0"/>
+                        <outlet property="onepassViewInXibButton" destination="gHG-dR-XRP" id="38r-yr-hjd"/>
+                        <outlet property="onepassViewNoHintBarButton" destination="U9X-jQ-Wt7" id="POU-b1-DlU"/>
+                        <outlet property="popupOneloginViewButton" destination="EGd-gn-upl" id="MOo-Bl-eQR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TQ5-XY-mBU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1513" y="1123"/>
+        </scene>
+        <!--Base Navigation Controller-->
+        <scene sceneID="68L-NM-KRe">
+            <objects>
+                <navigationController id="z59-oY-Uwb" customClass="BaseNavigationController" customModule="OneLoginViewExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W01-H9-R8g">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="iyN-Xe-FoS" kind="relationship" relationship="rootViewController" id="8Gq-Fv-OIr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Brh-j0-Y6b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="620" y="1114"/>
+        </scene>
+    </scenes>
+</document>
