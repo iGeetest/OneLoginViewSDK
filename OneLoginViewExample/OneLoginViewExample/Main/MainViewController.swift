@@ -12,16 +12,19 @@ import MediaPlayer
 import Alamofire
 import SnapKit
 
-class MainViewController: UIViewController {
-    let GTOneLoginAppId = "b41a959b5cac4dd1277183e074630945"
-    let GTOneLoginResultURL = "http://onepass.geetest.com/onelogin/result"
+struct ValidateTokenResult: Codable {
+    var status: Int
+    var result: String?
+}
+
+class MainViewController: BaseViewController {
     
     @IBOutlet weak var oneloginViewButton: UIButton!
     @IBOutlet weak var popupOneloginViewButton: UIButton!
     @IBOutlet weak var onepassViewHintBarButton: UIButton!
     @IBOutlet weak var onepassViewNoHintBarButton: UIButton!
     @IBOutlet weak var onepassViewInXibButton: UIButton!
-    
+        
     private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
     
@@ -33,7 +36,7 @@ class MainViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // MARK: ViewLifecycle
+    // MARK: ViewLifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +67,7 @@ class MainViewController: UIViewController {
     
     // MARK: Actions
     
-    @IBAction func oneloginViewAction(_ sender: Any) {
+    @IBAction func oneloginViewAction(_ sender: UIButton) {
         // OneLoginView 配置
         let viewConfigModel = OLViewConfigModel.init()
         
@@ -81,7 +84,7 @@ class MainViewController: UIViewController {
         }
         // 授权页面生命周期回调
         authViewModel.viewLifeCycleBlock = { (viewLifeCycle, animated) in
-            print("view life cycle: %@", viewLifeCycle)
+            print("view life cycle: ", viewLifeCycle)
             // 进入授权页面时，隐藏加载进度条
             if viewLifeCycle == "viewDidLoad" {
                 GTProgressHUD.hideAllHUD()
@@ -161,7 +164,7 @@ class MainViewController: UIViewController {
             if let appLogo = appLogo {
                 appLogo.snp.remakeConstraints { (make) in
                     make.centerX.equalTo(authContentView)
-                    make.bottom.equalTo(olAuthView.snp_top).offset(-50)
+                    make.bottom.equalTo(olAuthView.snp_top).offset(isLandscape ? -20 : -50)
                 }
             }
             
@@ -206,6 +209,7 @@ class MainViewController: UIViewController {
             if nil == otherLoginLabel {
                 otherLoginLabel = UILabel.init()
                 if let otherLoginLabel = otherLoginLabel {
+                    otherLoginLabel.tag = 1002
                     otherLoginLabel.backgroundColor = .clear
                     otherLoginLabel.textAlignment = .center
                     otherLoginLabel.font = UIFont.systemFont(ofSize: 15)
@@ -256,69 +260,117 @@ class MainViewController: UIViewController {
             }
             
             // 插入自定义背景
-            if let path = Bundle.main.path(forResource: "auth_vc_bg", ofType: "mp4") {
-                let url = URL.init(fileURLWithPath: path)
-                let playerItem = AVPlayerItem.init(url: url)
-                self.player = AVPlayer.init(playerItem: playerItem)
-                if let player = self.player {
-                    self.playerLayer = AVPlayerLayer.init(player: player)
-                    if let playerLayer = self.playerLayer {
-                        playerLayer.videoGravity = .resize
-                        
-                        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: nil, queue: OperationQueue.main) { (notification) in
-                            let time = CMTime.init(value: 0, timescale: 1)
-                            player.seek(to: time)
+            let playerView: UIView? = authContentView.viewWithTag(1003)
+            if let playerView = playerView, let playerLayer = self.playerLayer {
+                playerView.snp.remakeConstraints { (make) in
+                    make.edges.equalTo(authContentView)
+                }
+                
+                playerLayer.frame = playerView.bounds
+            } else {
+                if let path = Bundle.main.path(forResource: "auth_vc_bg", ofType: "mp4") {
+                    let url = URL.init(fileURLWithPath: path)
+                    let playerItem = AVPlayerItem.init(url: url)
+                    self.player = AVPlayer.init(playerItem: playerItem)
+                    if let player = self.player {
+                        self.playerLayer = AVPlayerLayer.init(player: player)
+                        if let playerLayer = self.playerLayer {
+                            playerLayer.videoGravity = .resize
+                            
+                            let playerView = UIView.init()
+                            playerView.tag = 1003
+                            playerView.frame = UIScreen.main.bounds
+                            playerView.backgroundColor = .white
+                            playerView.alpha = 0.5
+                            authContentView.addSubview(playerView)
+                            authContentView.sendSubviewToBack(playerView)
+                            playerView.snp.makeConstraints { (make) in
+                                make.edges.equalTo(authContentView)
+                            }
+                            
+                            playerView.layer.addSublayer(playerLayer)
+                            playerLayer.frame = playerView.bounds
+                            
                             player.play()
+                            
+                            NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveAVPlayerItemDidPlayToEndTimeNotification(_:)), name: .AVPlayerItemDidPlayToEndTime, object: nil)
+                            NotificationCenter.default.addObserver(self, selector: #selector(self.didReceiveBecomeActiveNotification(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
                         }
-                        
-                        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: OperationQueue.main) { (notification) in
-                            player.play()
-                        }
-                        
-                        let playerView = UIView.init()
-                        playerView.frame = UIScreen.main.bounds
-                        playerView.backgroundColor = .white
-                        playerView.alpha = 0.5
-                        authContentView.addSubview(playerView)
-                        authContentView.sendSubviewToBack(playerView)
-                        playerView.snp.makeConstraints { (make) in
-                            make.edges.equalTo(authContentView)
-                        }
-                        
-                        playerView.layer.addSublayer(playerLayer)
-                        playerLayer.frame = playerView.bounds
-                        
-                        player.play()
                     }
                 }
             }
         }
         
+        viewConfigModel.authViewModel = authViewModel
+        
         // 授权页面 OnePassView 配置
         let withHintBarModel = OPViewWithHintBarModel.init()
-        
-        viewConfigModel.authViewModel = authViewModel
+        // OnePassView 配置可参考 OnePassViewViewController.swift -> setupOnePassViewWithHintBar 方法中的配置
         viewConfigModel.withHintBarModel = withHintBarModel
         
         // 进入授权页面之前，加载进度条，因为此时可能预取号还未成功，需要先等待预取号成功后才会拉起授权页面
-        GTProgressHUD.showToast(withMessage: "")
-        OLVManager.requestToken(with: self, viewConfigModel: viewConfigModel) { [weak self] result in
-            if let sself = self {
-                sself.finishRequsetingToken(result: result)
-            }
+        GTProgressHUD.showLoadingHUD(withMessage: nil)
+        OLVManager.requestToken(with: self, viewConfigModel: viewConfigModel) { [unowned self] result in
+            self.finishRequsetingToken(result: result)
         }
     }
     
-    @IBAction func popupOneloginViewAction(_ sender: Any) {
+    @IBAction func popupOneloginViewAction(_ sender: UIButton) {
+        // OneLoginView 配置
+        let viewConfigModel = OLViewConfigModel.init()
+        
+        // 授权页面配置
+        let authViewModel = OLVAuthViewModel.init()
+        
+        // modal 方式进入授权页面，弹窗模式时，请不要使用 push 方式
+        authViewModel.pullAuthVCStyle = .modal
+        // 横竖屏配置
+        authViewModel.supportedInterfaceOrientations = .allButUpsideDown
+        // 黑夜模式适配
+        if #available(iOS 12.0, *) {
+            authViewModel.userInterfaceStyle = NSNumber.init(value: UIUserInterfaceStyle.unspecified.rawValue)
+        }
+        // 授权页面生命周期回调
+        authViewModel.viewLifeCycleBlock = { (viewLifeCycle, animated) in
+            print("view life cycle: ", viewLifeCycle)
+            // 进入授权页面时，隐藏加载进度条
+            if viewLifeCycle == "viewDidLoad" {
+                GTProgressHUD.hideAllHUD()
+            }
+        }
+        // 设置弹窗模式
+        authViewModel.isPopup = true
+        // 点击空白处可关闭弹窗
+        authViewModel.canClosePopupFromTapGesture = true
+        
+        viewConfigModel.authViewModel = authViewModel
+        
+        // 进入授权页面之前，加载进度条，因为此时可能预取号还未成功，需要先等待预取号成功后才会拉起授权页面
+        GTProgressHUD.showLoadingHUD(withMessage: nil)
+        // 弹窗模式时，controller 请传 navigationController
+        OLVManager.requestToken(with: self.navigationController, viewConfigModel: viewConfigModel) { [unowned self] result in
+            self.finishRequsetingToken(result: result)
+        }
     }
     
-    @IBAction func onepassHintBarViewAction(_ sender: Any) {
+    @IBAction func onepassHintBarViewAction(_ sender: UIButton) {
+        // 使用带提示条的 OnePassView
+        let onepassviewViewController = OnePassViewViewController.init()
+        onepassviewViewController.hasHintBar = true
+        self.navigationController?.pushViewController(onepassviewViewController, animated: true)
     }
     
-    @IBAction func onepassNoHintBarViewAction(_ sender: Any) {
+    @IBAction func onepassNoHintBarViewAction(_ sender: UIButton) {
+        // 使用不带提示条的 OnePassView
+        let onepassviewViewController = OnePassViewViewController.init()
+        self.navigationController?.pushViewController(onepassviewViewController, animated: true)
     }
     
-    @IBAction func onepassViewInXibAction(_ sender: Any) {
+    @IBAction func onepassViewInXibAction(_ sender: UIButton) {
+        // xib 中使用 OnePassView
+        let storyboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let controller = storyboard.instantiateViewController(withIdentifier: "OnePassViewXibViewController")
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func otherLoginAction(_ sender: UIButton) {
@@ -330,6 +382,22 @@ class MainViewController: UIViewController {
         
         OLVManager.dismissAuthViewController {
             
+        }
+    }
+    
+    // MARK: AVPlayer
+    
+    @objc func didReceiveAVPlayerItemDidPlayToEndTimeNotification(_ noti: Notification) {
+        if let player = self.player {
+            let time = CMTime.init(value: 0, timescale: 1)
+            player.seek(to: time)
+            player.play()
+        }
+    }
+    
+    @objc func didReceiveBecomeActiveNotification(_ noti: Notification) {
+        if let player = self.player {
+            player.play()
         }
     }
     
@@ -346,9 +414,7 @@ class MainViewController: UIViewController {
             }
             self.validateToken(token: token, appId: appID, processID: processID, authcode: authcode)
         } else {
-            OLVManager.dismissAuthViewController {
-                
-            }
+            OLVManager.setVerifyPhoneResult(false)
         }
     }
     
@@ -369,51 +435,45 @@ class MainViewController: UIViewController {
         
         Alamofire.request(GTOneLoginResultURL, method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).response { (response) in
             if let error = response.error {
-                print("validate token error: %@", error)
+                print("validate token error: ", error)
                 self.finishValidatingToken(result: nil, error: error)
                 return
             }
             
-            var result: Dictionary<AnyHashable, Any>?
+            var validateTokenResult: ValidateTokenResult?
             if let data = response.data {
                 do {
-                    result = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? Dictionary<AnyHashable, Any>
+                    validateTokenResult = try JSONDecoder().decode(ValidateTokenResult.self, from: data)
                 } catch {
                     
                 }
             }
             
-            if let result = result {
-                self.finishValidatingToken(result: result, error: response.error)
-            } else {
-                self.finishValidatingToken(result: nil, error: response.error)
-            }
+            self.finishValidatingToken(result: validateTokenResult, error: response.error)
         }
     }
     
-    func finishValidatingToken(result: Dictionary<AnyHashable, Any>?, error: Error?) {
-        print("validateToken result: %@, error: %@", (nil != result) ? result! : "", (nil != error) ? error! : "")
+    func finishValidatingToken(result: ValidateTokenResult?, error: Error?) {
+        print("validateToken result: , error: ", (nil != result) ? result! : "", (nil != error) ? error! : "")
         DispatchQueue.main.async {
             GTProgressHUD.hideAllHUD()
-            if let result = result, let status = result["status"], 200 == (status as! NSNumber).intValue {
-                let message = result["result"] as? String
-                if let message = message {
-                    print("手机号为：%@", message)
-                    OLVManager.renewPreGetToken()
-                    OLVManager.setVerifyPhoneResult(true)
-                } else {
-                    OLVManager.setVerifyPhoneResult(true)
-                }
-            } else {
-                let message = (result?["result"] != nil) ? (result?["result"] as! String) : "token验证失败"
-                GTProgressHUD.showToast(withMessage: message)
-                OLVManager.setVerifyPhoneResult(false)
+            var successed = false
+            if let result = result, 200 == result.status, let message = result.result {
+                successed = true
+                print("手机号为：", message)
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                OLVManager.dismissAuthViewController {
-                    
+            if successed {
+                OLVManager.renewPreGetToken()
+                OLVManager.setVerifyPhoneResult(true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    OLVManager.dismissAuthViewController {
+                        
+                    }
                 }
+            } else {
+                GTProgressHUD.showToast(withMessage: "token验证失败")
+                OLVManager.setVerifyPhoneResult(false)
             }
         }
     }
@@ -421,14 +481,34 @@ class MainViewController: UIViewController {
 
 extension MainViewController: OLVManagerDelegate {
     func didSendSmsCode(_ phone: String) {
-        
+        self.sendSms(phone, completion: { (successed) in
+            OLVManager.setSendSmsCodeResult(successed)
+        })
     }
     
     func didStartVerifySmsCode(_ smsCode: String) {
-        
+        self.checkSms(smsCode) { (result) in
+            switch result {
+            case .success(let checkResult):
+                print("check sms code result: ", checkResult)
+                OLVManager.setVerifySmsCodeResult(true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    OLVManager.dismissAuthViewController {
+                        
+                    }
+                }
+                
+            case .failure(let error):
+                print("check sms code error: ", error)
+                OLVManager.setVerifySmsCodeResult(false)
+                
+            }
+        }
     }
     
     func didResendSmsCode(_ phone: String) {
-        
+        self.sendSms(phone, completion: { (successed) in
+            OLVManager.setResendSmsCodeResult(successed)
+        })
     }
 }

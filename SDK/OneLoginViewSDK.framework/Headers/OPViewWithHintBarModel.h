@@ -89,16 +89,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, copy) NSString *hintVerifySmsCodeError;
 
-///**
-// * 手机号验证成功提示文案
-// */
-//@property (nonatomic, copy) NSString *hintVerifyPhoneSuccessed;
-//
-///**
-// * 短信验证成功提示文案
-// */
-//@property (nonatomic, copy) NSString *hintVerifySmsCodeSuccessed;
-
 /**
  * 提示条右侧关闭按钮对应的图标
  */
@@ -108,6 +98,16 @@ NS_ASSUME_NONNULL_BEGIN
  * 提示条右侧切换账号按钮对应的图标
  */
 @property (nonatomic, strong) UIImage *hintSwitchImage;
+
+/**
+ * 粒子点颜色
+ */
+@property (nonatomic, strong) UIColor *particlePointColor;
+
+/**
+ * 粒子连线颜色，默认值为 #D3E1FF
+ */
+@property (nonatomic, copy) NSString *particleLineColorHexString;
 
 @end
 

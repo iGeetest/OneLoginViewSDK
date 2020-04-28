@@ -19,6 +19,9 @@
 		1CC98CC02450751E00CE4312 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC98CBF2450751E00CE4312 /* MainViewController.swift */; };
 		1CC98CC32450760900CE4312 /* auth_vc_bg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1CC98CC22450760900CE4312 /* auth_vc_bg.mp4 */; };
 		5F514F3EAB0FFA0B888B1F09 /* libPods-OneLoginViewExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B8128DE4C43D79AA23B3E4 /* libPods-OneLoginViewExample.a */; };
+		E9BD4C662451A4520067EBB4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BD4C652451A4520067EBB4 /* BaseViewController.swift */; };
+		E9BD4C682451A48B0067EBB4 /* OnePassViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BD4C672451A48B0067EBB4 /* OnePassViewViewController.swift */; };
+		E9BD4C862452E8320067EBB4 /* OnePassViewXibViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9BD4C852452E8320067EBB4 /* OnePassViewXibViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		1CC98CC22450760900CE4312 /* auth_vc_bg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = auth_vc_bg.mp4; sourceTree = "<group>"; };
 		2B58C3C110F7C2C1D5005A0E /* Pods-OneLoginViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneLoginViewExample.release.xcconfig"; path = "Target Support Files/Pods-OneLoginViewExample/Pods-OneLoginViewExample.release.xcconfig"; sourceTree = "<group>"; };
 		C6B8128DE4C43D79AA23B3E4 /* libPods-OneLoginViewExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneLoginViewExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9BD4C652451A4520067EBB4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		E9BD4C672451A48B0067EBB4 /* OnePassViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePassViewViewController.swift; sourceTree = "<group>"; };
+		E9BD4C852452E8320067EBB4 /* OnePassViewXibViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePassViewXibViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +110,10 @@
 			isa = PBXGroup;
 			children = (
 				1CC65FF2245078C40051369A /* BaseNavigationController.swift */,
+				E9BD4C652451A4520067EBB4 /* BaseViewController.swift */,
 				1CC98CBF2450751E00CE4312 /* MainViewController.swift */,
+				E9BD4C672451A48B0067EBB4 /* OnePassViewViewController.swift */,
+				E9BD4C852452E8320067EBB4 /* OnePassViewXibViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -269,11 +278,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9BD4C682451A48B0067EBB4 /* OnePassViewViewController.swift in Sources */,
 				1CC98C6B244EC9EA00CE4312 /* AppDelegate.swift in Sources */,
 				1CC98C6D244EC9EA00CE4312 /* SceneDelegate.swift in Sources */,
 				1CC98C90244FDBB800CE4312 /* GTProgressHUD.m in Sources */,
 				1CC65FF3245078C40051369A /* BaseNavigationController.swift in Sources */,
 				1CC98CC02450751E00CE4312 /* MainViewController.swift in Sources */,
+				E9BD4C662451A4520067EBB4 /* BaseViewController.swift in Sources */,
+				E9BD4C862452E8320067EBB4 /* OnePassViewXibViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +439,7 @@
 					"$(PROJECT_DIR)/../SDK",
 				);
 				INFOPLIST_FILE = OneLoginViewExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,7 +467,7 @@
 					"$(PROJECT_DIR)/../SDK",
 				);
 				INFOPLIST_FILE = OneLoginViewExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

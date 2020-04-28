@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z59-oY-Uwb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z59-oY-Uwb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -118,7 +118,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQ5-XY-mBU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1513" y="1123"/>
+            <point key="canvasLocation" x="-5351" y="844"/>
         </scene>
         <!--Base Navigation Controller-->
         <scene sceneID="68L-NM-KRe">
@@ -134,7 +134,83 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Brh-j0-Y6b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="620" y="1114"/>
+            <point key="canvasLocation" x="-6580" y="844"/>
+        </scene>
+        <!--One Pass View Xib View Controller-->
+        <scene sceneID="4Pv-st-m87">
+            <objects>
+                <viewController storyboardIdentifier="OnePassViewXibViewController" id="4TN-Ka-0Sf" customClass="OnePassViewXibViewController" customModule="OneLoginViewExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J48-Nn-Kon">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DKX-GV-NjY" customClass="OPAuthView">
+                                <rect key="frame" x="52" y="74" width="310" height="118"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="310" id="8AB-KS-JuF"/>
+                                    <constraint firstAttribute="height" constant="118" id="sDj-Es-QDF"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vdr-IS-G3K" customClass="OPAuthView">
+                                <rect key="frame" x="42" y="202" width="330" height="126"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="126" id="JEN-Bi-rPM"/>
+                                    <constraint firstAttribute="width" constant="330" id="jYY-9Q-8lE"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHC-wD-aZ1" customClass="OPAuthView">
+                                <rect key="frame" x="67" y="338" width="280" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="eGC-N1-mAo"/>
+                                    <constraint firstAttribute="width" constant="280" id="ifL-IJ-e5K"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DL3-AO-Ycw" customClass="OPAuthView">
+                                <rect key="frame" x="97" y="448" width="220" height="60"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="CZI-sk-vi8"/>
+                                    <constraint firstAttribute="width" constant="220" id="S0D-2u-VWc"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1dI-RU-q6j" customClass="OPAuthView">
+                                <rect key="frame" x="27" y="518" width="360" height="100"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="360" id="AqW-eb-otd"/>
+                                    <constraint firstAttribute="height" constant="100" id="XLf-aA-82b"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DL3-AO-Ycw" firstAttribute="top" secondItem="nHC-wD-aZ1" secondAttribute="bottom" constant="10" id="0e2-DO-pIH"/>
+                            <constraint firstItem="1dI-RU-q6j" firstAttribute="centerX" secondItem="D41-bN-HqA" secondAttribute="centerX" id="2bq-U4-ozD"/>
+                            <constraint firstItem="nHC-wD-aZ1" firstAttribute="centerX" secondItem="D41-bN-HqA" secondAttribute="centerX" id="6VH-kS-4l6"/>
+                            <constraint firstItem="DKX-GV-NjY" firstAttribute="top" secondItem="D41-bN-HqA" secondAttribute="top" constant="30" id="ClT-lR-8by"/>
+                            <constraint firstItem="1dI-RU-q6j" firstAttribute="top" secondItem="DL3-AO-Ycw" secondAttribute="bottom" constant="10" id="Dey-fX-2Xk"/>
+                            <constraint firstItem="DKX-GV-NjY" firstAttribute="centerX" secondItem="D41-bN-HqA" secondAttribute="centerX" id="bk5-uW-yAM"/>
+                            <constraint firstItem="DL3-AO-Ycw" firstAttribute="centerX" secondItem="D41-bN-HqA" secondAttribute="centerX" id="fBx-W1-anx"/>
+                            <constraint firstItem="Vdr-IS-G3K" firstAttribute="centerX" secondItem="D41-bN-HqA" secondAttribute="centerX" id="hPH-Hf-GlV"/>
+                            <constraint firstItem="nHC-wD-aZ1" firstAttribute="top" secondItem="Vdr-IS-G3K" secondAttribute="bottom" constant="10" id="mhD-zk-zoD"/>
+                            <constraint firstItem="Vdr-IS-G3K" firstAttribute="top" secondItem="DKX-GV-NjY" secondAttribute="bottom" constant="10" id="pUE-ar-pxQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="D41-bN-HqA"/>
+                    </view>
+                    <connections>
+                        <outlet property="authView1" destination="DKX-GV-NjY" id="y20-vt-fw1"/>
+                        <outlet property="authView2" destination="Vdr-IS-G3K" id="i4p-uv-dN7"/>
+                        <outlet property="authView3" destination="nHC-wD-aZ1" id="bRc-HM-Baw"/>
+                        <outlet property="authView4" destination="DL3-AO-Ycw" id="1sQ-yX-hQF"/>
+                        <outlet property="authView5" destination="1dI-RU-q6j" id="VFi-ZT-nq3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lXD-bn-Cyi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6581" y="1547"/>
         </scene>
     </scenes>
 </document>
