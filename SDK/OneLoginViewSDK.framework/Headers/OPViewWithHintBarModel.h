@@ -65,7 +65,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *hintPhoneFormatError;
 
 /**
- * 手机号输入完之前，提示条提示文案
+ * 手机号输入完之前，提示条默认提示文案字体，不设置时，SDK 会根据整体控件大小进行适配
+ */
+@property (nonatomic, strong) UIFont *hintDefaultFont;
+
+/**
+ * 手机号输入完之前，提示条默认提示文案
  */
 @property (nonatomic, copy) NSString *hintDefault;
 

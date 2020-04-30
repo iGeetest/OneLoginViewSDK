@@ -85,10 +85,15 @@ NS_ASSUME_NONNULL_BEGIN
  @param completion 关闭页面后的回调
  
  @discussion
- 请不要使用其他方式关闭授权页面, 否则可能导致 OneLogin 无法再次调起
+ 请不要使用其他方式关闭授权页面, 否则可能导致无法再次拉起授权页面
  */
 + (void)dismissAuthViewController:(BOOL)animated completion:(void (^ __nullable)(void))completion;
 + (void)dismissAuthViewController:(void (^ __nullable)(void))completion;
+
+/**
+ * @abstract 服务条款左边复选框是否勾选
+ */
++ (BOOL)isProtocolCheckboxChecked;
 
 /**
  获取SDK版本号

@@ -103,6 +103,8 @@ class MainViewController: BaseViewController {
                 authViewModel.additionalPrivacyTerms = [item1, item2, item3]
             }
         }
+        // 设置服务条款外字符
+        authViewModel.auxiliaryPrivacyWords = ["登录表示同意", "和", "、", "且使用本机号码登录"]
         // 屏幕旋转回调
         authViewModel.authVCTransitionBlock = { (size, coordinator, customAreaView) in
             // 背景视图横竖屏旋转适配

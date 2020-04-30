@@ -34,7 +34,7 @@ typedef void(^OLVAuthVCAutoLayoutBlock)(UIView *authView, UIView *authContentVie
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
 
-// MARK: Background Image/授权页面背景图片
+// MARK: Background/授权页面背景
 
 /**
  授权页背景颜色。默认白色。

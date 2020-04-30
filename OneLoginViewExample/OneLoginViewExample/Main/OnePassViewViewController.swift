@@ -16,9 +16,7 @@ class OnePassViewViewController: BaseViewController {
     var hasHintBar: Bool = false
     
     private let customOnePassView = true
-    private lazy var opAuthView: OPAuthView = {
-        return OPAuthView.init()
-    }()
+    private lazy var opAuthView: OPAuthView = OPAuthView()
     
     // MARK: ViewLifeCycle
     
@@ -92,6 +90,7 @@ class OnePassViewViewController: BaseViewController {
             }
 //            withHintBarModel.hintFont = UIFont.systemFont(ofSize: 12.0) // 字体建议不设置，SDK 会根据控件尺寸进行适配
 //            withHintBarModel.hintPhoneFont = UIFont.systemFont(ofSize: 12) // 字体建议不设置，SDK 会根据控件尺寸进行适配
+//            withHintBarModel.hintDefaultFont = UIFont.systemFont(ofSize: 14) // 字体建议不设置，SDK 会根据控件尺寸进行适配
             withHintBarModel.hintDefault = "为您守护账号安全"
             withHintBarModel.hintVerifyPhone = "手机"
             withHintBarModel.hintSmsCodeHasSended = "验证码已发送"
@@ -208,7 +207,7 @@ class OnePassViewViewController: BaseViewController {
 //            noHintBarModel.smsCodeTextFont = OLVFontUtil.font(fromBundle: 26.0) // 字体建议不设置，SDK 会根据控件尺寸进行适配
 //            noHintBarModel.smsCodeCountDownFont = UIFont.systemFont(ofSize: 15.0) // 字体建议不设置，SDK 会根据控件尺寸进行适配
 //            noHintBarModel.smsCodeResendFont = UIFont.systemFont(ofSize: 15.0) // 字体建议不设置，SDK 会根据控件尺寸进行适配
-            noHintBarModel.smsCodePhoneFont = OLVFontUtil.font(fromBundle: 12.0) // 字体建议不设置，SDK 会根据控件尺寸进行适配
+//            noHintBarModel.smsCodePhoneFont = OLVFontUtil.font(fromBundle: 12.0) // 字体建议不设置，SDK 会根据控件尺寸进行适配
             noHintBarModel.smsCodePhoneColor = .white
             if let image = UIImage.init(named: "") {        // 关闭按钮图片
                 noHintBarModel.smsCodeCloseImage = image
